@@ -65,7 +65,12 @@ int main(int argc, const char* argv[])
     //cv::imshow("img", img);
     //cv::waitKey(0);
 
-    
+    //prepare data
+    for (int ptIdx = 0; ptIdx < ptCnt; ptIdx++)
+    {
+        Point2f& dstpt = ptPairs[ptIdx].imagePt;
+        dstpt -= Point2f(ocx, ocy);
+    }
 
     //stage 1
 
@@ -74,8 +79,8 @@ int main(int argc, const char* argv[])
     
     for (int ptIdx = 0; ptIdx < ptCnt; ptIdx++)
     {
-        Point3f srcpt = ptPairs[ptIdx].worldPt;
-        Point2f dstpt = ptPairs[ptIdx].imagePt - Point2f(ocx, ocy);
+        const Point3f srcpt = ptPairs[ptIdx].worldPt;
+        const Point2f dstpt = ptPairs[ptIdx].imagePt;
 
 
         matrixA(ptIdx, 0) = dstpt.y * srcpt.x;
@@ -120,8 +125,8 @@ int main(int argc, const char* argv[])
         float r13 = a3 * absty/sx;
         float tx = a4 * absty / sx;
 
-        Point3f& srcpt = ptPairs[5].worldPt;
-        Point2f& dstpt = ptPairs[5].imagePt;
+        const Point3f& srcpt = ptPairs[5].worldPt;
+        const Point2f& dstpt = ptPairs[5].imagePt;
 
         float x = r11 * srcpt.x + r12 * srcpt.y + r13 * srcpt.z + tx;
         float y = r21 * srcpt.x + r22 * srcpt.y + r23 * srcpt.z + absty;
