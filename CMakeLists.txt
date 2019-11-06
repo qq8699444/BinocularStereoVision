@@ -12,6 +12,8 @@ set(OpenCV_DIR E:/opencv/opencv-410-build/install)
 find_package(OpenCV REQUIRED)
 
 
-add_executable(dlt dlt.cpp)
-target_link_libraries(dlt ${OpenCV_LIBS} ) 
+add_executable(dltCalibration dltCalibration.cpp)
+target_link_libraries(dltCalibration ${OpenCV_LIBS} ) 
 
+add_executable(tsaiCalibration tsaiCalibration.cpp)
+target_link_libraries(tsaiCalibration ${OpenCV_LIBS} ) 
