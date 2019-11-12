@@ -16,7 +16,7 @@ using namespace std;
 using namespace cv;
 
 vector<std::string> stringSplit(const string& str,const char delim = ' ');
-std::vector<Point2f>    prasePointSFromFile(const string& filename);
+std::vector<Point2d>    prasePointSFromFile(const string& filename);
 
 
 

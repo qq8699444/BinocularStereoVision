@@ -11,18 +11,18 @@ using namespace std;
 
 using namespace cv;
 
-bool computeHomography(std::vector<Point2f>& srcPts, std::vector<Point2f> dstPts, float homograpy[9])
+bool computeHomography(std::vector<Point2d>& srcPts, std::vector<Point2d> dstPts, double homograpy[9])
 {
     //A*x=b
-    Eigen::MatrixXf  matrixA(srcPts.size() * 2, 8);
-    Eigen::MatrixXf  matrixb(srcPts.size() * 2, 1);
+    Eigen::MatrixXd  matrixA(srcPts.size() * 2, 8);
+    Eigen::MatrixXd  matrixb(srcPts.size() * 2, 1);
 
     int ptIdx = 0;
     for (int y = 0; y < srcPts.size(); y++)
     {
 
-        Point2f& worldpt = srcPts[ptIdx];
-        Point2f& imagept = dstPts[ptIdx];
+        Point2d& worldpt = srcPts[ptIdx];
+        Point2d& imagept = dstPts[ptIdx];
 
 
         matrixA(2 * ptIdx, 0) = worldpt.x;
@@ -49,13 +49,13 @@ bool computeHomography(std::vector<Point2f>& srcPts, std::vector<Point2f> dstPts
 
     }
 
-    Eigen::MatrixXf tmp = matrixA.transpose() * matrixA;
+    Eigen::MatrixXd tmp = matrixA.transpose() * matrixA;
     if (tmp.determinant() < 10e-3)
     {
         return false;
     }
     //Eigen::Matrix<float, 8, 1>
-    Eigen::MatrixXf result = (matrixA.transpose() * matrixA).inverse() * matrixA.transpose() * matrixb;
+    Eigen::MatrixXd result = (matrixA.transpose() * matrixA).inverse() * matrixA.transpose() * matrixb;
     //cout << "result:" << result << endl;
 
     for (int i = 0;i < 8;i++)

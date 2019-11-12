@@ -3,6 +3,14 @@
 #include <sstream>
 #include "parser.h"
 
+template <class Type>
+Type stringToNum(const string& str)
+{
+    istringstream iss(str);
+    Type num;
+    iss >> num;
+    return num;
+}
 
 vector<std::string> stringSplit(const string& str,const char delim)
 {
@@ -20,10 +28,10 @@ vector<std::string> stringSplit(const string& str,const char delim)
     return tokens;
 }
 
-std::vector<Point2f>    prasePointSFromFile(const string& filename)
+std::vector<Point2d>    prasePointSFromFile(const string& filename)
 {
     std::ifstream     fs(filename);
-    std::vector<Point2f> result;
+    std::vector<Point2d> result;
 
     if (fs.is_open())
     {
@@ -40,7 +48,7 @@ std::vector<Point2f>    prasePointSFromFile(const string& filename)
                 {
                     continue;
                 }
-                corrds.push_back(atof(token.c_str()));
+                corrds.push_back(stringToNum<double>(token.c_str()));
             }
         }
 

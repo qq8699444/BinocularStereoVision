@@ -18,5 +18,5 @@ target_link_libraries(dltCalibration ${OpenCV_LIBS} )
 add_executable(tsaiCalibration tsaiCalibration.cpp)
 target_link_libraries(tsaiCalibration ${OpenCV_LIBS} ) 
 
-add_executable(zzhangCalibration zzhangCalibration.cpp)
+add_executable(zzhangCalibration zzhangCalibration.cpp dltalgo.cpp parser.cpp)
 target_link_libraries(zzhangCalibration ${OpenCV_LIBS} ) 
