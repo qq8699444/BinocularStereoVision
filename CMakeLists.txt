@@ -20,3 +20,11 @@ target_link_libraries(tsaiCalibration ${OpenCV_LIBS} )
 
 add_executable(zzhangCalibration zzhangCalibration.cpp dltalgo.cpp parser.cpp)
 target_link_libraries(zzhangCalibration ${OpenCV_LIBS} ) 
+
+add_executable(mrginghamChessBoardDetector mrginghamChessBoardDetector.cpp mrgingham.cpp chess.cpp find_chessboard_corners.cpp find_blobs.cpp find_grid.cpp)
+target_link_libraries(mrginghamChessBoardDetector ${OpenCV_LIBS} ) 
+
+add_executable(gaussNewton gaussNewton.cpp)
+target_link_libraries(gaussNewton ${OpenCV_LIBS} ) 
+
+
