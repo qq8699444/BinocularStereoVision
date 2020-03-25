@@ -17,7 +17,7 @@ using namespace mrgingham;
 
 int main(int argc, const char* argv[])
 {
-    string imgFile = "left10.jpg";
+    string imgFile = "front.png";
 
     cv::Mat image = cv::imread(imgFile.c_str(), IMREAD_GRAYSCALE);
     if (image.empty())
@@ -37,11 +37,11 @@ int main(int argc, const char* argv[])
     int found_pyramid_level = find_chessboard_from_image_array(points_out,
             NULL,
             image,
-            0,
-            false, seq,
+            -1,
+            true, seq,
             "111");
     bool result = (found_pyramid_level >= 0);
-    
+    cout << "find " << points_out.size() << " points" << endl;
 
     return 0;
 }

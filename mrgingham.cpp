@@ -7,8 +7,7 @@
 
 namespace mrgingham
 {
-#if 1
-    
+
     bool find_circle_grid_from_image_array( std::vector<PointDouble>& points_out,
                                             const cv::Mat& image,
                                             bool     debug,
@@ -20,7 +19,7 @@ namespace mrgingham
                                      debug, debug_sequence);
     }
 
-    
+
     bool find_circle_grid_from_image_file( std::vector<PointDouble>& points_out,
                                            const char* filename,
                                            bool     debug,
@@ -46,9 +45,12 @@ namespace mrgingham
 
         std::vector<PointInt> points;
         find_chessboard_corners_from_image_array(&points, image, image_pyramid_level, debug, debug_image_filename);
+        printf("got %d points from find_chessboard_corners_from_image_array\n",points.size());
         if(!find_grid_from_points(points_out, points,
                                   debug, debug_sequence))
             return false;
+
+        printf("got %d points from find_grid_from_points\n",points_out.size());
 
         // we found a grid! If we're not trying to refine the locations, or if
         // we can't refine them, we're done
@@ -97,9 +99,10 @@ namespace mrgingham
         }
         return true;
     }
-#endif
+
     // *refinement_level is managed by realloc(). IT IS THE CALLER'S
     // *RESPONSIBILITY TO free() IT
+
     int find_chessboard_from_image_array( std::vector<PointDouble>& points_out,
                                           signed char** refinement_level,
                                           const cv::Mat& image,
@@ -135,6 +138,7 @@ namespace mrgingham
 
     // *refinement_level is managed by realloc(). IT IS THE CALLER'S
     // *RESPONSIBILITY TO free() IT
+
     int find_chessboard_from_image_file( std::vector<PointDouble>& points_out,
                                          signed char** refinement_level,
                                          const char* filename,
